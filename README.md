@@ -27,10 +27,12 @@
 * `Symfony/Routing`
 
 Файлы, которые всегда можно изменять:
+
 1. `composer.json` - возможно управление автолоадингом
 2. `DepdendencyInjection/ServiceCompilerPass.php` - можно изменять имплементацию методов
 
 Файлы, которые нельзя изменять:
+
 1. `MiniKernel.php`
 2. `web/web.php`
 3. `Common/*`
