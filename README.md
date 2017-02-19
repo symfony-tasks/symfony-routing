@@ -28,7 +28,7 @@
 
 Файлы, которые всегда можно изменять:
 1. `composer.json` - возможно изменение зависимостей и управление автолоадингом
-2. `DepdendencyInjection/ServiceCompilerPass.php` - можно изменять имплементацию метода `getListeners`
+2. `DepdendencyInjection/ServiceCompilerPass.php` - можно изменять имплементацию методов
 
 Файлы, которые нельзя изменять:
 1. `MiniKernel.php`

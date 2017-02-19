@@ -2,23 +2,17 @@
 
 namespace BankiruSchool\Routing\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use BankiruSchool\Routing\Common\AbstractCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\KernelEvents;
 
-final class ServiceCompilerPass implements CompilerPassInterface
+final class ServiceCompilerPass extends AbstractCompilerPass
 {
-    /** {@inheritdoc} */
-    public function process(ContainerBuilder $container)
-    {
-        $evm = $container->getDefinition('event_dispatcher');
-        foreach ($this->getListeners() as $listener) {
-            $evm->addMethodCall('addListener', [KernelEvents::REQUEST, $listener]);
-        }
-    }
-
-    private function getListeners(): array
+    protected function getListeners(): array
     {
         return [];
+    }
+
+    protected function doAdditionalConfiguration(ContainerBuilder $builder)
+    {
     }
 }
