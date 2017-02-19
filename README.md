@@ -35,7 +35,7 @@
 2. `web/web.php`
 3. `Common/*`
 
-Для размещения кода используйте namespace `BankiruSchool\Routing\Tasks\TasksN`
+Для размещения кода используйте namespace `BankiruSchool\Routing\Tasks`
 
 Сервер должен запускаться командой `php -S 0.0.0.0:8000 web/web/php`
 
