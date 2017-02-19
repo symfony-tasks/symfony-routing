@@ -1,0 +1,19 @@
+{
+  "autoload": {
+    "psr-4": {
+      "BankiruSchool\\Routing\\": "./"
+    }
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "symfony/http-kernel": "~3.2",
+    "symfony/dependency-injection": "~3.2",
+    "symfony/config": "~3.2",
+    "symfony/console": "~3.2"
+  },
+  "config": {
+    "platform": {
+      "php": "7.0"
+    }
+  }
+}
