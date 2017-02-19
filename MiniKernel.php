@@ -2,8 +2,11 @@
 
 namespace BankiruSchool\Routing;
 
+use BankiruSchool\Routing\DependencyInjection\ServiceCompilerPass;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 use Symfony\Component\HttpKernel\Controller\ControllerResolver;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\Kernel;
@@ -41,13 +44,16 @@ final class MiniKernel extends Kernel
     {
         $container = parent::buildContainer();
 
-        $evm = $container->register('event_dispatcher', EventDispatcher::class);
-        $resolver = $container->register('controller_resolver', ControllerResolver::class);
-        $httpKernel = $container->register('http_kernel', HttpKernel::class);
-        $httpKernel->setArguments([
-            $evm,
-            $resolver
-        ]);
+        $container
+            ->register('http_kernel', HttpKernel::class)
+            ->setArguments([
+                $container->register('event_dispatcher', EventDispatcher::class),
+                $container->register('controller_resolver', ControllerResolver::class),
+                $container->register('request_stack', RequestStack::class),
+                $container->register('argument_resolver', ArgumentResolver::class),
+            ]);
+
+        $container->addCompilerPass(new ServiceCompilerPass());
 
         return $container;
     }
