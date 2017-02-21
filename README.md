@@ -76,6 +76,6 @@
 ## Материалы для изучения 
 
 * https://symfony.com/doc/current/reference/events.html
-* http://symfony.com/doc/current/components/http_kernel.html
+* https://symfony.com/doc/current/components/http_kernel.html
 * https://symfony.com/doc/current/create_framework/front_controller.html
 * https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpKernel/HttpKernel.php#L123
