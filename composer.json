@@ -1,5 +1,8 @@
 {
   "autoload": {
+    "files": [
+        "Common/functionController.php"
+    ],
     "psr-4": {
       "BankiruSchool\\Routing\\": "./"
     }
