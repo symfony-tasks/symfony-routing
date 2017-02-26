@@ -20,30 +20,27 @@ class RequestListener
     {
         $request = $event->getRequest();
         $path = $request->getPathInfo();
-        
-        $routes = $this->getRoutes();
-        
-        if($request->isMethod('GET') && array_key_exists($path, $routes)) {
+
+        $routes = self::getRoutes();
+
+        if ($request->isMethod('GET') && array_key_exists($path, $routes)) {
             $request->attributes->add($routes[$path]);
         }
     }
-    
+
     /**
      * @return array
      */
-    private function getRoutes():array
+    private static function getRoutes(): array
     {
         $responseFactory = ResponseFactory::create();
-        
+
         return [
             '/task1/task.check' => ['_controller' => 'BankiruSchool\Routing\Common\action'],
             '/task2/task.check' => ['_controller' => [StaticController::class, 'action']],
             '/task3/task.check' => ['_controller' => [new BasicController($responseFactory), 'action']],
             '/task4/task.check' => ['_controller' => new ObjectController()],
-            '/task5/task.check' => [
-                '_controller' => 'BankiruSchool\Routing\Common\DispatchedController::action',
-                'factory' => $responseFactory,
-            ],
+            '/task5/task.check' => ['_controller' => 'BankiruSchool\Routing\Common\DispatchedController::action'],
         ];
     }
 }
