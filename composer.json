@@ -2,7 +2,10 @@
   "autoload": {
     "psr-4": {
       "BankiruSchool\\Routing\\": "./"
-    }
+    },
+    "files": [
+      "Common/functionController.php"
+    ]
   },
   "minimum-stability": "stable",
   "require": {
