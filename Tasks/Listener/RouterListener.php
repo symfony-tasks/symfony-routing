@@ -2,31 +2,40 @@
 
 namespace BankiruSchool\Routing\Tasks\Listener;
 
+use BankiruSchool\Routing\Common\BasicController;
+use BankiruSchool\Routing\Common\DispatchedController;
+use BankiruSchool\Routing\Common\Factory\ResponseFactory;
+use BankiruSchool\Routing\Common\StaticController;
+use BankiruSchool\Routing\Tasks\Controller\InstanceController;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class RouterListener
 {
-    private static $routeMap = [
-        '/task1/task.check' => ['_controller' => 'BankiruSchool\Routing\Common\action'],
-    ];
-
+    /**
+     * @param GetResponseEvent $event
+     */
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
-        $route = self::getRoute($request->getPathInfo());
+        $path = $request->getPathInfo();
 
-        if ($request->isMethod('GET') && $route !== false) {
+        if ($request->isMethod('GET') === true && array_key_exists($path, self::getRouteMap()) === true) {
+            $route = self::getRouteMap()[$path];
             $request->attributes->add($route);
         }
     }
 
-    private static function getRoute(string $path)
+    /**
+     * @return array
+     */
+    private static function getRouteMap()
     {
-        if (array_key_exists($path, self::$routeMap) === false) {
-            return false;
-        }
-
-        return self::$routeMap[$path];
+        return [
+            '/task1/task.check' => ['_controller' => 'BankiruSchool\Routing\Common\action'],
+            '/task2/task.check' => ['_controller' => [StaticController::class, 'action']],
+            '/task3/task.check' => ['_controller' => [new BasicController(ResponseFactory::create()), 'action']],
+            '/task4/task.check' => ['_controller' => new InstanceController()],
+            '/task5/task.check' => ['_controller' => '\BankiruSchool\Routing\Common\DispatchedController::action'],
+        ];
     }
-
 }
