@@ -19,7 +19,7 @@ class RouterListener
         $request = $event->getRequest();
         $path = $request->getPathInfo();
 
-        if ($request->isMethod('GET') === true && array_key_exists($path, self::getRouteMap()) === true) {
+        if ($request->isMethod('GET') && array_key_exists($path, self::getRouteMap())) {
             $route = self::getRouteMap()[$path];
             $request->attributes->add($route);
         }
