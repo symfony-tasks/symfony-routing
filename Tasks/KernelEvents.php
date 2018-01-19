@@ -3,6 +3,7 @@
 namespace BankiruSchool\Routing\Tasks;
 
 use BankiruSchool\Routing\Common\BasicController;
+use BankiruSchool\Routing\Common\DispatchedController;
 use BankiruSchool\Routing\Common\Factory\ResponseFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -41,6 +42,11 @@ class KernelEvents
             'task4' => [
                 'path' => '/task4/task.check',
                 'controller' => new Controller(),
+                'method' => 'GET',
+            ],
+            'task5' => [
+                'path' => '/task5/task.check',
+                'controller' => [new DispatchedController(), 'action'],
                 'method' => 'GET',
             ],
         ];
