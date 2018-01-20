@@ -57,7 +57,8 @@ final class MiniKernel extends Kernel
                 new Reference('controller_resolver'),
                 new Reference('request_stack'),
                 new Reference('argument_resolver'),
-            ]);
+            ])
+            ->setPublic(true);
 
         $container->addCompilerPass(new ServiceCompilerPass());
 
